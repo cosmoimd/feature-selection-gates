@@ -2119,7 +2119,7 @@ class ViTBaseline(nn.Module):
         self.fsag_init_method = config.get('fsag_init_method', 'xavier')
         num_classes = config.get('num_classes', 1000)  # Default to 1000 if not specified
         self.pretrained = config.get('pretrained', False)
-        path = config.get('model_path', '/home/groffo/.cache/torch/hub/checkpoints/vit_model_384.bin')
+        path = config.get('model_path', '/gr_checkpoints/vit_model_384.bin')
 
         # Load the Vision Transformer model
         self.model = vit_tiny_patch16_384(pretrained=False)
