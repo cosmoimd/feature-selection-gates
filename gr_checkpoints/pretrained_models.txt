@@ -1,0 +1,16 @@
+Description
+
+In the toolbox, the primary pretrained model provided is the Vision Transformer (ViT) Tiny, which is compatible with any transformer-based architecture.
+The weights for this model are included in the zip file named `miccai24_FSG_GR_vit.zip`, which is approximately 21.5 MB.
+These weights can be extracted into the `gr_checkpoints` folder.
+The weights are the official pretrained weights for ViT Tiny, trained on the ImageNet-1k dataset.
+While the ViT Tiny is provided, users are free to utilize any other pretrained model as required.
+
+For generating depth maps, we have integrated the MiDaS model, which is pretrained for depth estimation.
+The MiDaS model can be easily loaded using the `torch.hub` API with the following code:
+
+```python
+torch.hub.load("intel-isl/MiDaS", "MiDaS")
+```
+
+No additional downloads are necessary for MiDaS; it will automatically be downloaded the first time the code is executed. This ensures a seamless setup process for users requiring depth map functionality.
