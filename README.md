@@ -11,7 +11,6 @@ This repository contains the official implementation of the work "Feature Select
 
 If you find our work useful for your research, please consider citing the paper:
 
-
 ~~~~
 Preprint version:
 @misc{roffo2024hardattention,
