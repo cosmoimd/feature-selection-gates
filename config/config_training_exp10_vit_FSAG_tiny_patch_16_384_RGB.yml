@@ -22,15 +22,13 @@
 #    archivePrefix={arXiv},
 #    primaryClass={eess.IV}
 # }
-
-
 # DATASETS
 dataset_params:
   # Class name of the PyTorch Dataset
   dataset_class: PolypSizeEstimationDataset
 
   # Directory where output files will be stored
-  output_folder: '/results/camera-ready/toolbox_paper_experiments/baseline_resnet18_RGB_384'
+  output_folder: '/results/camera-ready/toolbox_paper_experiments/vit_FSAG_tiny_patch16_384'
   dataset_csv_path: '/datasets_polyp_sizing_paper/'
   saving_step: 5000 # If the dataframe has reached saving_step rows, save it to the output folder.
 
@@ -50,7 +48,7 @@ dataset_params:
   n_frames_to_sample_train: 40
 
   # Number of samples per gradient update
-  batch_size: 32
+  batch_size: 1
 
   # Ratio for filtering out the samples whose bounding boxes are not considered centered
   filter_centered_samples_ratio: 1.0
@@ -70,7 +68,7 @@ dataset_params:
   include_rgb_mask: True
 
   # Number of worker threads for loading the data
-  num_workers: 4
+  num_workers: 0
 
   # number of folds for cross-validation. In inference mode, defines the number of folds to use for the inference.
   kfold: 6
@@ -78,7 +76,7 @@ dataset_params:
   start_from_fold: 0
 
 
-num_epochs: 30
+num_epochs: 40
 experiment_metrics: ["f1", "balanced_accuracy", 'balanced_perf']
 
 
@@ -103,8 +101,8 @@ noise_factor: 0.01
 # Or Transformers
 # + model: fsg_vision_transformers
 # + model_class: FSGViT
-model: multi_stream_nets # refers to the Python file containing the model classes
-model_class: SingleModeNetR18 # specific model class to use without FSG
+model: fsg_vision_transformers # refers to the Python file containing the model classes
+model_class: FSGViT # specific model class to use
 
 # Parameters for the model
 model_params:
@@ -116,10 +114,12 @@ model_params:
   use_rgb: True
   use_mask: False
   use_depth: False
+  model_path: '/vit_checkpoints/vit_tiny_patch16_384.bin'
 
 # LOSS FUNCTION
 loss: weighted_size_combined_loss # refers to the Python file containing the loss function classes
 loss_class: WeightedCombinedLoss # specific loss function class to use
+
 
 # Parameters for the loss function
 loss_params:
@@ -129,17 +129,18 @@ loss_params:
   size_threshold_1: 5.0
   weight_1: 3.0
   size_threshold_2: 10.0
-  weight_2: 6.0
+  weight_2: 5.0
 
 # OPTIMIZER
 optimizer: Adam # name of the optimizer
 
 # Parameters for the optimizer
 optimizer_params:
-  lr: 0.0001 # learning rate
+  lr: 0.00005 # learning rate
   weight_decay: 0.00001 # weight decay (L2 regularization)
 
-clip_grad: 8.0
+clip_grad: 10.0
+clip_gr_grad: 32.0
 
 # LEARNING RATE SCHEDULER
 lr_scheduler: cosine_annealing_warm_restarts # refers to the Python file containing the scheduler classes
@@ -149,14 +150,13 @@ lr_scheduler_class: CosineScheduler # specific scheduler class to use
 scheduler_params:
   cycle_limit: 1 # number of epochs for the first restart
   T_mult: 1 # multiplication factor for the number of epochs between restarts,
-  min_lr: 0.0001 # minimum learning rate
+  min_lr: 0.00001 # minimum learning rate
 
 eval_freq: 2 # validate the model every N epochs.
 
 # Feature Selection Gates options.
-FSAG: False # enable this option for FSGs and select the model and model_class that actually implements the FSG.
-FSAG_LR: False # enable this option for FSGs and select the model and model_class that actually implements the FSG.
-
-gr_ofs_lr: 0.0 # learning rate for the gradient routing online-feature-selction
-inference_mode: True # set to False for training
+FSAG: True  # enable this option for FSGs and select the model and model_class that actually implements the FSG.
+FSAG_LR: False  # enable this option for FSGs and select the model and model_class that actually implements the FSG.
+gr_ofs_lr: 0.0001 # learning rate for the gradient routing online-feature-selection
+inference_mode: True  # set to False for training
 verbose_validation_mode: False # If True, the model will be validated on the validation set for each checkpoint (epochs and folds).

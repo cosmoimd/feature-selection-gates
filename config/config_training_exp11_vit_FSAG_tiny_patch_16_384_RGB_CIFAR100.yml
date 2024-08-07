@@ -23,21 +23,19 @@
 #    primaryClass={eess.IV}
 # }
 
-
 # DATASETS
 dataset_params:
   # Class name of the PyTorch Dataset
-  dataset_class: PolypSizeEstimationDataset
+  dataset_class: CIFAR100Dataset
 
   # Directory where output files will be stored
-  output_folder: '/results/camera-ready/toolbox_paper_experiments/baseline_resnet18_RGB_384'
-  dataset_csv_path: '/datasets_polyp_sizing_paper/'
+  output_folder: '/results/camera-ready/toolbox_paper_experiments/CIFAR100_vit_FSAG_tiny_patch16_384'
+  dataset_csv_path: '/CIFAR100Dataset/'
+
   saving_step: 5000 # If the dataframe has reached saving_step rows, save it to the output folder.
 
   # List of datasets; each dataset is specified by a name, a path to a CSV file, and the name of the GT column
-  datasets: # NAME,CSV_FILE,PATH_FRAMES_FOLDERS,FORMAT,GT_NAME,OBJ_ID
-    - [ 'SUN', '/sundatabase/metadata/sun_dataset_labels.csv', '/sundatabase/', 'case%s', 'Size', 'ID' ]
-    - [ 'REALC', '/real-colon_dataset_released_v20230228/lesion_info.csv', '/real-colon_dataset_released_v20230228/', '%s_frames', 'size [mm]', 'unique_object_id' ]
+  datasets: []
 
   # Specifies the precision/accuracy of the float data
   precision_float_accuracy: 1.0 # +/- 1 mm
@@ -47,19 +45,20 @@ dataset_params:
   target_process_max: 20.0
 
  # Number of frames to sample from each video
-  n_frames_to_sample_train: 40
+  n_frames_to_sample_train: 256
+  n_frames_to_sample_valid: 2560
 
   # Number of samples per gradient update
-  batch_size: 32
+  batch_size: 64
 
   # Ratio for filtering out the samples whose bounding boxes are not considered centered
   filter_centered_samples_ratio: 1.0
 
   # Parameters for preprocessing the images (e.g., normalization, circular cropping)
   image_preprocessing:
-    mean: [0.32239652, 0.22631808, 0.17500061]
-    std: [0.31781745, 0.2405859, 0.19327126]
-    circular_crop: True
+    mean: [0.4914, 0.4822, 0.4465]
+    std: [0.2470, 0.2435, 0.2616]
+    circular_crop: False
     crop_radius_ratio: 1.0
 
 
@@ -72,13 +71,12 @@ dataset_params:
   # Number of worker threads for loading the data
   num_workers: 4
 
-  # number of folds for cross-validation. In inference mode, defines the number of folds to use for the inference.
-  kfold: 6
+  # number of sets
+  kfold: 1
 
   start_from_fold: 0
 
-
-num_epochs: 30
+num_epochs: 200
 experiment_metrics: ["f1", "balanced_accuracy", 'balanced_perf']
 
 
@@ -90,11 +88,11 @@ transform_combo: PairedTCombo1 # specific transform class to use
 resize_to: 384 # Dimension to which the input images will be resized
 rotation_degree: 30
 color_jitter_params:
-  brightness: 0.15
-  contrast: 0.15
-  saturation: 0.15
-  hue: 0.01
-noise_factor: 0.01
+  brightness: 0.1
+  contrast: 0.1
+  saturation: 0.1
+  hue: 0.008
+noise_factor: 0.002
 
 # MODEL
 # FSG are implemented in the following:
@@ -103,33 +101,35 @@ noise_factor: 0.01
 # Or Transformers
 # + model: fsg_vision_transformers
 # + model_class: FSGViT
-model: multi_stream_nets # refers to the Python file containing the model classes
-model_class: SingleModeNetR18 # specific model class to use without FSG
+model: fsg_vision_transformers # refers to the Python file containing the model classes
+model_class: FSGViT # specific model class to use
 
 # Parameters for the model
 model_params:
   train_midas: False
-  num_classes: 1 # number of output classes
+  num_classes: 100 # number of output classes
   num_fc_layers: 3 # number of fully connected layers
   nodes_fc_layers: [128, 128] # number of nodes in each fully connected layer
   dropout_rate: 0.35 # dropout rate
   use_rgb: True
   use_mask: False
   use_depth: False
+  model_path: '/vit_checkpoints/vit_tiny_patch16_384.bin'
 
 # LOSS FUNCTION
-loss: weighted_size_combined_loss # refers to the Python file containing the loss function classes
-loss_class: WeightedCombinedLoss # specific loss function class to use
+loss: classification_loss # refers to the Python file containing the loss function classes
+loss_class: CIFAR100Loss # specific loss function class to use
 
 # Parameters for the loss function
 loss_params:
   alpha: 0.0
   beta: 0.0
-  gamma: 1.0
-  size_threshold_1: 5.0
-  weight_1: 3.0
-  size_threshold_2: 10.0
-  weight_2: 6.0
+  gamma: 0.0
+  size_threshold_1: 0.0
+  weight_1: 0.0
+  size_threshold_2: 0.0
+  weight_2: 0.0
+
 
 # OPTIMIZER
 optimizer: Adam # name of the optimizer
@@ -137,9 +137,10 @@ optimizer: Adam # name of the optimizer
 # Parameters for the optimizer
 optimizer_params:
   lr: 0.0001 # learning rate
-  weight_decay: 0.00001 # weight decay (L2 regularization)
+  weight_decay: 0.0000000001 # weight decay (L2 regularization)
 
-clip_grad: 8.0
+clip_grad: 10.0
+clip_gr_grad: 128.0
 
 # LEARNING RATE SCHEDULER
 lr_scheduler: cosine_annealing_warm_restarts # refers to the Python file containing the scheduler classes
@@ -149,14 +150,13 @@ lr_scheduler_class: CosineScheduler # specific scheduler class to use
 scheduler_params:
   cycle_limit: 1 # number of epochs for the first restart
   T_mult: 1 # multiplication factor for the number of epochs between restarts,
-  min_lr: 0.0001 # minimum learning rate
+  min_lr: 0.0000001 # minimum learning rate
 
 eval_freq: 2 # validate the model every N epochs.
 
 # Feature Selection Gates options.
-FSAG: False # enable this option for FSGs and select the model and model_class that actually implements the FSG.
-FSAG_LR: False # enable this option for FSGs and select the model and model_class that actually implements the FSG.
-
-gr_ofs_lr: 0.0 # learning rate for the gradient routing online-feature-selction
-inference_mode: True # set to False for training
+FSAG: True  # enable this option for FSGs and select the model and model_class that actually implements the FSG.
+FSAG_LR: False  # enable this option for FSGs and select the model and model_class that actually implements the FSG.
+gr_ofs_lr: 0.01 # learning rate for the gradient routing online-feature-selection
+inference_mode: True  # set to False for training
 verbose_validation_mode: False # If True, the model will be validated on the validation set for each checkpoint (epochs and folds).
