@@ -115,7 +115,7 @@ model_params:
   use_rgb: True
   use_mask: False
   use_depth: False
-  model_path: '/vit_checkpoints/vit_tiny_patch16_384.bin'
+  model_path: '/gr_checkpoints/vit_tiny_patch16_384.bin'
 
 # LOSS FUNCTION
 loss: classification_loss # refers to the Python file containing the loss function classes
