@@ -9,8 +9,9 @@ While the ViT Tiny is provided, users are free to utilize any other pretrained m
 For generating depth maps, we have integrated the MiDaS model, which is pretrained for depth estimation.
 The MiDaS model can be easily loaded using the `torch.hub` API with the following code:
 
-```python
+```
 torch.hub.load("intel-isl/MiDaS", "MiDaS")
 ```
 
-No additional downloads are necessary for MiDaS; it will automatically be downloaded the first time the code is executed. This ensures a seamless setup process for users requiring depth map functionality.
+No additional downloads are necessary for MiDaS; it will automatically be downloaded the first time the code is executed.
+This ensures a seamless setup process for users requiring depth map functionality.
