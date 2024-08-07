@@ -2,17 +2,25 @@
 
 This repository contains the official implementation of the work "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing" as presented in MICCAI 2024.
 
-# MICCAI main conference: 7-9 October 2024. Work in Progress...
+# MICCAI main conference: 7-9 October 2024. 
+
+# Work in Progress...
+
+
 ## Citation:
 
 If you find our work useful for your research, please consider citing the paper:
 
+
 ~~~~
-@article{Roffo2024FSGR,
-  title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
-  author={Roffo, Giorgio and Biffi, Carlo and Salvagnini, Pietro and Cherubini, Andrea},
-  journal={arXiv preprint arXiv:specific_identifier},
-  year={2024},
+Preprint version:
+@misc{roffo2024hardattention,
+    title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
+    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+    year={2024},
+    eprint={2407.04400},
+    archivePrefix={arXiv},
+    primaryClass={eess.IV}
 }
 ~~~~
 
