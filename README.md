@@ -38,15 +38,21 @@ The paper introduces Feature Selection Gates (FSG) and Gradient Routing (GR) as 
 * Full codebase release for reproducibility and benchmarking
 
 ## Toolbox Structure
+Feature Selection/Attention Gates with Gradient Routing for Online Feature Selection.
+
 ~~~~
-├── config
+├── example_configs
+├── gr_checkpoints
+│   ├── miccai24_FSG_GR_vit.zip
+│   └── pretrained_models.txt
+├── MICCAI_2024_official_dataset_splits
+│   ├── MICCAI2024-FSG-GR-datasets-official-splits-.zip
+│   ├── per_object_gt_group_distribution_per_fold.png
+│   ├── per_object_gt_group_distribution_per_unique_id_per_fold.png
+│   └── per_object_kfold_distribution.png
 ├── modules
 │   ├── analytics
-│   │   ├── analyse_FSG_scores.py
-│   │   ├── calculate_metrics.py
-│   │   ├── figure_2_paper_CIFAR_100_plots.py
-│   │   ├── supp_material_stats_cohen_k.py
-│   │   └── triclass_threshold_optimizer.py
+│   │   └── calculate_metrics.py
 │   ├── datasets
 │   │   ├── dataset.py
 │   │   └── sampler.py
@@ -54,26 +60,20 @@ The paper introduces Feature Selection Gates (FSG) and Gradient Routing (GR) as 
 │   │   ├── classification_loss.py
 │   │   └── weighted_size_combined_loss.py
 │   ├── models
-│   │   ├── builder.py
-│   │   ├── fsg_builder.py
-│   │   ├── manipulate.py
-│   │   ├── pretrained.py
-│   │   ├── registry.py
-│   │   ├── fsg_vision_transformers.py
-│   │   ├── multi_stream_nets.py
-│   │   └── vision_transformers.py
+│   │   ├── gr_transfutils
+│   │   │   ├── fsg_vision_transformers.py
+│   │   │   ├── multi_stream_nets.py
+│   │   │   └── vision_transformers.py
 │   ├── schedulers
 │   │   └── cosine_annealing_warm_restarts.py
-│   └── transforms
-│       └── transforms_sizing.py
+│   ├── transforms
+│   │   ├── transforms_sizing.py
+│   │   └── base_params.py
 ├── runners
-│   ├── build_configuration.py
-│   └── trainer.py
+│   └── build_configuration.py
 ├── utils.py
-|── main_train_and_infer.py
-|── main_testing.py
-|── preprocess_raw_datasets.py
 └── README.md
+
 ~~~~
 
 ## Modules Overview
