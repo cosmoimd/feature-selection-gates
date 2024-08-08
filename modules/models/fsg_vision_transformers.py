@@ -24,6 +24,11 @@
 #    primaryClass={eess.IV}
 # }
 
+# -----------------------------------------------------------------
+# FSAG: Feature-Selection-Attention Gates
+# Gradient Routing (GR) for Online-Feature-Selection (OFS)
+# ----------------------------------------------------------------
+
 """ FSG Vision Transformer (ViT) in PyTorch
 
 A PyTorch implement of FSG with Vision Transformers as described in:
@@ -1829,7 +1834,10 @@ def fsg_vit_huge_patch14_clip_quickgelu_378(pretrained: bool = False, **kwargs) 
 
 
 # Experimental models below
-
+    #-----------------------------------------------------------------
+    # FSAG: Feature-Selection-Attention Gates
+    # Gradient Routing (GR) loss for Online-Feature-Selection (OFS)
+    # ----------------------------------------------------------------
 @register_model
 def fsg_vit_base_patch32_plus_256(pretrained: bool = False, **kwargs) -> FSGVisionTransformer:
     """ ViT-Base (ViT-B/32+)
@@ -2169,10 +2177,10 @@ register_model_deprecations(__name__, {'fsg_vit_tiny_patch16_224_in21k': 'fsg_vi
     'fsg_vit_giant_patch14_224_clip_laion2b': 'fsg_vit_giant_patch14_clip_224.laion2b', })
 
 
-
-##############################################
-########### THE FSG-ViT
-##############################################
+# -----------------------------------------------------------------
+# FSAG: Feature-Selection-Attention Gates
+# Gradient Routing (GR) for Online-Feature-Selection (OFS)
+# -----------------------------------------------------------------
 class FSGViT(nn.Module):
     def __init__(self, config):
         super(FSGViT, self).__init__()

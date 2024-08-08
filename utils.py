@@ -26,6 +26,11 @@
 #    primaryClass={eess.IV}
 # }
 
+# -----------------------------------------------------------------
+# FSAG: Feature-Selection-Attention Gates
+# Gradient Routing (GR) for Online-Feature-Selection (OFS)
+# ----------------------------------------------------------------
+
 import json
 import os
 import re
