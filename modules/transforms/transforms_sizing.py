@@ -7,13 +7,13 @@
 # its methods, ideas, or any part of them.
 
 # Accepted Publication:
-# @inproceedings{roffo2024featureselection,
+# @inproceedings{roffo2024FSG,
 #    title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
 #    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
-#    booktitle={MICCAI},
+#    booktitle={MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.},
 #    year={2024}
+#    organization={Springer}
 # }
-
 # Preprint version:
 # @misc{roffo2024hardattention,
 #    title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},

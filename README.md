@@ -9,17 +9,28 @@ This repository contains the official implementation of the work "Feature Select
 
 ## Citation:
 
-If you find our work useful for your research, please consider citing the paper:
-
+Please cite both the accepted version and the preprint version if you use this code,
+its methods, ideas, or any part of them.
 ~~~~
-Preprint version:
++ Accepted Publication:
+
+@inproceedings{roffo2024FSG,
+   title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
+   author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+   booktitle={MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.},
+   year={2024}
+   organization={Springer}
+}
+
++ Preprint version:
+
 @misc{roffo2024hardattention,
-    title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
-    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
-    year={2024},
-    eprint={2407.04400},
-    archivePrefix={arXiv},
-    primaryClass={eess.IV}
+   title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
+   author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+   year={2024},
+   eprint={2407.04400},
+   archivePrefix={arXiv},
+   primaryClass={eess.IV}
 }
 ~~~~
 

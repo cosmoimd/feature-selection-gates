@@ -1,4 +1,12 @@
 """ Vision Transformer (ViT) in PyTorch
+Citation:
+@inproceedings{roffo2024FSG,
+   title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
+   author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+   booktitle={MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.},
+   year={2024}
+   organization={Springer}
+}
 
 A PyTorch implement of Vision Transformers as described in:
 
@@ -18,6 +26,8 @@ The official jax code is released and available at
 
 Hacked together by / Copyright 2020, Ross Wightman
 """
+
+
 import logging
 import math
 from collections import OrderedDict
