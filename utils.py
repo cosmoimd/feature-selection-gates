@@ -50,13 +50,14 @@ import matplotlib.pyplot as plt
 from modules.analytics.calculate_metrics import compute_metrics_testing
 
 # File information
+# Author: Giorgio Roffo, PhD. Senior Research Scientist. Cosmo IMD, Lainate, MI, Italy.
 __author__ = "Giorgio Roffo, Dr."
 __copyright__ = "Copyright 2024, COSMO IMD"
 __credits__ = ["Giorgio Roffo"]
 __license__ = "Private"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "groffo"
-__email__ = "groffo@cosmoimd.com"
+__email__ = "groffo@cosmoimd.com,giorgio.roffo@gmail.com"
 __status__ = "Production"  # can be "Prototype", "Development" or "Production"
 
 # Define the order of methods for plotting

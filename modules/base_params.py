@@ -30,6 +30,15 @@
 # FSAG: Feature-Selection-Attention Gates
 # Gradient Routing (GR) for Online-Feature-Selection (OFS)
 # ----------------------------------------------------------------
+# File information
+__author__ = "Giorgio Roffo, Dr."
+__copyright__ = "Copyright 2024, COSMO IMD"
+__credits__ = ["Giorgio Roffo"]
+__license__ = "Private"
+__version__ = "1.0.1"
+__maintainer__ = "groffo"
+__email__ = "groffo@cosmoimd.com,giorgio.roffo@gmail.com"
+__status__ = "Production"  # can be "Prototype", "Development" or "Production"
 
 # ensure that all keys exist in the dictionary and set default values
 # update these defaults as necessary

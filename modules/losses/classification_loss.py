@@ -43,14 +43,15 @@ import matplotlib.pyplot as plt
 # from datasets import dataset
 
 # File information
-__author__ = "Giorgio Roffo"
-__copyright__ = "Copyright 2023, COSMO IMD"
+# Author: Giorgio Roffo, PhD. Senior Research Scientist. Cosmo IMD, Lainate, MI, Italy.
+__author__ = "Giorgio Roffo, Dr."
+__copyright__ = "Copyright 2024, COSMO IMD"
 __credits__ = ["Giorgio Roffo"]
 __license__ = "Private"
-__version__ = "1.0.0"
-__maintainer__ = "Giorgio Roffo"
-__email__ = "groffo@cosmoimd.com"
-__status__ = "Development"  # can be "Prototype", "Development" or "Production"
+__version__ = "1.0.1"
+__maintainer__ = "groffo"
+__email__ = "groffo@cosmoimd.com,giorgio.roffo@gmail.com"
+__status__ = "Production"  # can be "Prototype", "Development" or "Production"
 
 
 class CIFAR100Loss(nn.Module):

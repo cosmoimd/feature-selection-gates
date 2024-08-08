@@ -23,6 +23,8 @@
 #    primaryClass={eess.IV}
 # }
 
+# Author: Giorgio Roffo, PhD. Senior Research Scientist. Cosmo IMD, Lainate, MI, Italy.
+
 # DATASETS
 dataset_params:
   # Class name of the PyTorch Dataset

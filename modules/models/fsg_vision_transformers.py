@@ -52,7 +52,7 @@ Preprint version:
 
 """
 import logging
-import math, ssl
+import math
 from collections import OrderedDict
 from functools import partial
 from typing import Any, Callable, Dict, Optional, Sequence, Set, Tuple, Type, Union, List
@@ -75,14 +75,24 @@ from timm.layers import PatchEmbed, Mlp, DropPath, AttentionPoolLatent, RmsNorm,
     trunc_normal_, lecun_normal_, resample_patch_embed, resample_abs_pos_embed, use_fused_attn, get_act_layer, \
     get_norm_layer, LayerType
 
-from modules.models._builder import build_model_with_cfg
-from modules.models._manipulate import named_apply, checkpoint_seq, adapt_input_conv
-from modules.models._registry import generate_default_cfgs, register_model, register_model_deprecations
+from modules.models.gr_transfutils._builder import build_model_with_cfg
+from modules.models.gr_transfutils._manipulate import named_apply, checkpoint_seq, adapt_input_conv
+from modules.models.gr_transfutils._registry import generate_default_cfgs, register_model, register_model_deprecations
 
 __all__ = ['FSGVisionTransformer']  # model_registry will add each entrypoint fn to this
 
 _logger = logging.getLogger(__name__)
 
+# File information
+# Author: Giorgio Roffo, PhD. Senior Research Scientist. Cosmo IMD, Lainate, MI, Italy.
+__author__ = "Giorgio Roffo, Dr."
+__copyright__ = "Copyright 2024, COSMO IMD"
+__credits__ = ["Giorgio Roffo"]
+__license__ = "Private"
+__version__ = "1.0.1"
+__maintainer__ = "groffo"
+__email__ = "groffo@cosmoimd.com,giorgio.roffo@gmail.com"
+__status__ = "Production"  # can be "Prototype", "Development" or "Production"
 
 
 def scaled_dot_product_attention(query, key, value, attn_mask=None, dropout_p=0.0, is_causal=False,

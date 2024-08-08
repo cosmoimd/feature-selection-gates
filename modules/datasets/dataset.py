@@ -52,9 +52,9 @@ __author__ = "Giorgio Roffo, Dr."
 __copyright__ = "Copyright 2024, COSMO IMD"
 __credits__ = ["Giorgio Roffo"]
 __license__ = "Private"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "groffo"
-__email__ = "groffo@cosmoimd.com"
+__email__ = "groffo@cosmoimd.com,giorgio.roffo@gmail.com"
 __status__ = "Production"  # can be "Prototype", "Development" or "Production"
 
 
