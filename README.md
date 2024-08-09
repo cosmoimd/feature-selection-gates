@@ -1,29 +1,32 @@
+## Work in Progress...
+## 7-9 October 2024. 
+
+## MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.
+
 # Feature Selection Gates with Gradient Routing Toolbox
 
-This repository contains the official implementation of the work "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing" as presented in MICCAI 2024.
-
-# MICCAI main conference: 7-9 October 2024. 
-
-# Work in Progress...
+This repository contains the official implementation of the paper "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing", presented at MICCAI 2024. This toolbox provides implementations for CNNs, multistream CNNs, ViTs, and their augmented variants using Feature-Selection Gates (FSG) or Hard-Attention Gates (HAG) with Gradient Routing (GR). The primary objective is to enhance model generalization and reduce overfitting, specifically in the context of gastroenterological polyp size assessment.
 
 
-## Citation:
 
-Please cite both the accepted version and the preprint version if you use this code,
-its methods, ideas, or any part of them.
+# Citing this Work
+
+If you find this toolbox useful in your research, please cite the following papers:
+
+Accepted Publication:
 ~~~~
-+ Accepted Publication:
-
 @inproceedings{roffo2024FSG,
    title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
    booktitle={MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.},
-   year={2024}
+   year={2024},
    organization={Springer}
 }
+~~~~
 
-+ Preprint version:
 
+Preprint Version:
+~~~~
 @misc{roffo2024hardattention,
    title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
@@ -33,6 +36,7 @@ its methods, ideas, or any part of them.
    primaryClass={eess.IV}
 }
 ~~~~
+We extend our gratitude to the MICCAI community and all collaborators for their invaluable contributions and support.
 
 ## Summary
 
