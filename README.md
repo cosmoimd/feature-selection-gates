@@ -23,7 +23,7 @@
 
 ## Work in Progress... 7-9 October 2024. 
 
-# Feature Selection Gates with Gradient Routing Toolbox
+# Feature Selection Gates with Gradient Routing
 
 This repository contains the official implementation of the paper "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing", presented at MICCAI 2024. This toolbox provides implementations for CNNs, multistream CNNs, ViTs, and their augmented variants using Feature-Selection Gates (FSG) or Hard-Attention Gates (HAG) with Gradient Routing (GR). The primary objective is to enhance model generalization and reduce overfitting, specifically in the context of gastroenterological polyp size assessment.
 
