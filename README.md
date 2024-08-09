@@ -28,8 +28,6 @@
 
 This repository contains the official implementation of the paper "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing", presented at MICCAI 2024. This toolbox provides implementations for CNNs, multistream CNNs, ViTs, and their augmented variants using Feature-Selection Gates (FSG) or Hard-Attention Gates (HAG) with Gradient Routing (GR). The primary objective is to enhance model generalization and reduce overfitting, specifically in the context of gastroenterological polyp size assessment.
 
-
-
 # Citing this Work
 
 If you find this toolbox useful in your research, please cite the following papers:
@@ -61,17 +59,14 @@ We extend our gratitude to the MICCAI community and all collaborators for their 
 
 ## Summary
 
-The paper introduces Feature Selection Gates (FSG) and Gradient Routing (GR) as novel contributions to enhance model generalization and combat overfitting in gastroenterological polyp size assessment. This work demonstrates significant performance enhancements across several datasets, including CIFAR-100 and specialized endoscopic datasets. The repository aims to facilitate further research and standardization in medical image analysis by providing a comprehensive set of tools for the community.
+In this work, we present *Feature-Selection Gates* (FSG), also known as *Hard-Attention Gates* (HAG), along with a novel approach called *Gradient Routing* (GR) for Online Feature Selection (OFS) in deep learning models. This method aims to enhance performance in endoscopic image computing by reducing overfitting and improving generalization.
 
-## Public Code Methods:
+**Key contributions:**
 
-* Feature Selection Gates (FSG) implementation
-* Gradient Routing (GR) strategy
-* Convolutional Neural Networks (CNNs) integration
-* Vision Transformers (ViTs) augmentation
-* Comprehensive evaluation across multiple datasets including CIFAR-100
-* Polyp size estimation using specialized endoscopic datasets
-* Full codebase release for reproducibility and benchmarking
+- **FSG/HAG:** Implements sparsification with learnable weights, serving as a regularization strategy to promote sparse connectivity in neural networks (Convolutional and Vision Transformer models).
+- **GR:** Optimizes FSG/HAG parameters through dual forward passes, independent of the main model, refining feature re-weighting.
+- **Performance Improvement:** Validated across multiple datasets, including CIFAR-100 and specialized endoscopic datasets (REAL-Colon, Misawa, and SUN), showing significant gains in binary and triclass polyp size classification.
+
 
 ## Toolbox Structure
 Feature Selection/Attention Gates with Gradient Routing for Online Feature Selection.
