@@ -67,6 +67,8 @@ In this work, we present *Feature-Selection Gates* (FSG), also known as *Hard-At
 - **GR:** Optimizes FSG/HAG parameters through dual forward passes, independent of the main model, refining feature re-weighting.
 - **Performance Improvement:** Validated across multiple datasets, including CIFAR-100 and specialized endoscopic datasets (REAL-Colon, Misawa, and SUN), showing significant gains in binary and triclass polyp size classification.
 
+![image](https://github.com/user-attachments/assets/d06ddfb8-7a60-4973-9274-db50dcc28d74)
+
 
 ## Toolbox Structure
 Feature Selection/Attention Gates with Gradient Routing for Online Feature Selection.
