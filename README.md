@@ -108,15 +108,6 @@ Feature Selection/Attention Gates with Gradient Routing for Online Feature Selec
 
 ~~~~
 
-## Modules Overview
-
-* analytics: Includes tools for evaluating FSG score distributions and calculating various performance metrics.
-* datasets: Handles data loading, preprocessing, and sampling for various dataset formats.
-* losses: Defines custom loss functions, including weighted loss strategies for size estimation.
-* models: Contains PyTorch model definitions, with scripts for constructing FSG-enhanced CNNs and ViTs.
-* schedulers: Learning rate schedulers to optimize training dynamics.
-* transforms: Image transformation and augmentation techniques for data preprocessing.
-
 ## Datasets Download & Preparation
 
 ### REAL-colon Dataset
