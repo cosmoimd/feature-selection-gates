@@ -1,52 +1,90 @@
-# Feature Selection Gates with Gradient Routing Toolbox
+<div align="center">
 
-This repository contains the official implementation of the work "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing" as presented in MICCAI 2024.
-
-# MICCAI main conference: 7-9 October 2024. 
-
-# Work in Progress...
+![image](https://github.com/user-attachments/assets/05f1ea5d-5436-45f0-95a8-b70f105dd965)
 
 
-## Citation:
+</div>
 
-If you find our work useful for your research, please consider citing the paper:
+<div align="center">
 
+<table>
+  <tr>
+   <td><a href="https://arxiv.org/pdf/2407.04400" target="_blank">Paper PDF</a></td>
+   <td><a href="https://github.com/cosmoimd/feature-selection-gates/blob/main/MICCAI_2024_official_dataset_splits/MICCAI2024-FSG-GR-datasets-official-splits-.zip" target="_blank">Dataset Splits</a></td>
+   <td><a href="https://www.researchgate.net/profile/Giorgio-Roffo" target="_blank">Contact-Author Page</a></td>
+</tr>
+</table>
+
+</div>
+
+**Keywords**: Endoscopic Image Computing, Feature Selection Gates, Hard-Attention Gates, Gradient Routing, CNNs, Vision Transformers, Gastroenterological Polyp Size Estimation, Medical Image Analysis, Overfitting Reduction, Model Generalization.
+
+## MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.
+
+## Work in Progress... 7-9 October 2024. 
+
+# Feature Selection Gates with Gradient Routing
+
+This repository contains the official implementation of the paper "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing", presented at MICCAI 2024. This toolbox provides implementations for CNNs, multistream CNNs, ViTs, and their augmented variants using Feature-Selection Gates (FSG) or Hard-Attention Gates (HAG) with Gradient Routing (GR). The primary objective is to enhance model generalization and reduce overfitting, specifically in the context of gastroenterological polyp size assessment.
+
+# Citing this Work
+
+If you find this toolbox useful in your research, please cite the following papers:
+
+Accepted Publication:
 ~~~~
-Preprint version:
-@misc{roffo2024hardattention,
-    title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
-    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
-    year={2024},
-    eprint={2407.04400},
-    archivePrefix={arXiv},
-    primaryClass={eess.IV}
+@inproceedings{roffo2024FSG,
+   title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
+   author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+   booktitle={MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.},
+   year={2024},
+   organization={Springer}
 }
 ~~~~
 
+
+Preprint Version:
+~~~~
+@misc{roffo2024hardattention,
+   title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
+   author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+   year={2024},
+   eprint={2407.04400},
+   archivePrefix={arXiv},
+   primaryClass={eess.IV}
+}
+~~~~
+We extend our gratitude to the MICCAI community and all collaborators for their invaluable contributions and support.
+
 ## Summary
 
-The paper introduces Feature Selection Gates (FSG) and Gradient Routing (GR) as novel contributions to enhance model generalization and combat overfitting in gastroenterological polyp size assessment. This work demonstrates significant performance enhancements across several datasets, including CIFAR-100 and specialized endoscopic datasets. The repository aims to facilitate further research and standardization in medical image analysis by providing a comprehensive set of tools for the community.
+In this work, we present *Feature-Selection Gates* (FSG), also known as *Hard-Attention Gates* (HAG), along with a novel approach called *Gradient Routing* (GR) for Online Feature Selection (OFS) in deep learning models. This method aims to enhance performance in endoscopic image computing by reducing overfitting and improving generalization.
 
-## Public Code Methods:
+**Key contributions:**
 
-* Feature Selection Gates (FSG) implementation
-* Gradient Routing (GR) strategy
-* Convolutional Neural Networks (CNNs) integration
-* Vision Transformers (ViTs) augmentation
-* Comprehensive evaluation across multiple datasets including CIFAR-100
-* Polyp size estimation using specialized endoscopic datasets
-* Full codebase release for reproducibility and benchmarking
+- **FSG/HAG:** Implements sparsification with learnable weights, serving as a regularization strategy to promote sparse connectivity in neural networks (Convolutional and Vision Transformer models).
+- **GR:** Optimizes FSG/HAG parameters through dual forward passes, independent of the main model, refining feature re-weighting.
+- **Performance Improvement:** Validated across multiple datasets, including CIFAR-100 and specialized endoscopic datasets (REAL-Colon, Misawa, and SUN), showing significant gains in binary and triclass polyp size classification.
+
+![image](https://github.com/user-attachments/assets/d06ddfb8-7a60-4973-9274-db50dcc28d74)
+
 
 ## Toolbox Structure
+Feature Selection/Attention Gates with Gradient Routing for Online Feature Selection.
+
 ~~~~
-├── config
+├── example_configs
+├── gr_checkpoints
+│   ├── miccai24_FSG_GR_vit.zip
+│   └── pretrained_models.txt
+├── MICCAI_2024_official_dataset_splits
+│   ├── MICCAI2024-FSG-GR-datasets-official-splits-.zip
+│   ├── per_object_gt_group_distribution_per_fold.png
+│   ├── per_object_gt_group_distribution_per_unique_id_per_fold.png
+│   └── per_object_kfold_distribution.png
 ├── modules
 │   ├── analytics
-│   │   ├── analyse_FSG_scores.py
-│   │   ├── calculate_metrics.py
-│   │   ├── figure_2_paper_CIFAR_100_plots.py
-│   │   ├── supp_material_stats_cohen_k.py
-│   │   └── triclass_threshold_optimizer.py
+│   │   └── calculate_metrics.py
 │   ├── datasets
 │   │   ├── dataset.py
 │   │   └── sampler.py
@@ -54,36 +92,21 @@ The paper introduces Feature Selection Gates (FSG) and Gradient Routing (GR) as 
 │   │   ├── classification_loss.py
 │   │   └── weighted_size_combined_loss.py
 │   ├── models
-│   │   ├── builder.py
-│   │   ├── fsg_builder.py
-│   │   ├── manipulate.py
-│   │   ├── pretrained.py
-│   │   ├── registry.py
-│   │   ├── fsg_vision_transformers.py
-│   │   ├── multi_stream_nets.py
-│   │   └── vision_transformers.py
+│   │   ├── gr_transfutils
+│   │   │   ├── fsg_vision_transformers.py
+│   │   │   ├── multi_stream_nets.py
+│   │   │   └── vision_transformers.py
 │   ├── schedulers
 │   │   └── cosine_annealing_warm_restarts.py
-│   └── transforms
-│       └── transforms_sizing.py
+│   ├── transforms
+│   │   ├── transforms_sizing.py
+│   │   └── base_params.py
 ├── runners
-│   ├── build_configuration.py
-│   └── trainer.py
+│   └── build_configuration.py
 ├── utils.py
-|── main_train_and_infer.py
-|── main_testing.py
-|── preprocess_raw_datasets.py
 └── README.md
+
 ~~~~
-
-## Modules Overview
-
-* analytics: Includes tools for evaluating FSG score distributions and calculating various performance metrics.
-* datasets: Handles data loading, preprocessing, and sampling for various dataset formats.
-* losses: Defines custom loss functions, including weighted loss strategies for size estimation.
-* models: Contains PyTorch model definitions, with scripts for constructing FSG-enhanced CNNs and ViTs.
-* schedulers: Learning rate schedulers to optimize training dynamics.
-* transforms: Image transformation and augmentation techniques for data preprocessing.
 
 ## Datasets Download & Preparation
 
