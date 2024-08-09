@@ -1,7 +1,28 @@
-## Work in Progress...
-## 7-9 October 2024. 
+<div align="center">
+
+![image](https://github.com/user-attachments/assets/05f1ea5d-5436-45f0-95a8-b70f105dd965)
+
+
+</div>
+
+<div align="center">
+
+<table>
+  <tr>
+   <td><a href="https://arxiv.org/pdf/2407.04400" target="_blank">Paper PDF</a></td>
+   <td><a href="https://github.com/cosmoimd/feature-selection-gates/blob/main/MICCAI_2024_official_dataset_splits/MICCAI2024-FSG-GR-datasets-official-splits-.zip" target="_blank">Dataset Splits</a></td>
+    <td><a href="https://www.researchgate.net/profile/Giorgio-Roffo" target="_blank">Author Page</a></td>
+    <td><a href="https://scholar.google.it/citations?user=cD2LFuUAAAAJ&hl=en" target="_blank">Google Scholar</a></td>
+  </tr>
+</table>
+
+</div>
+
+**Keywords**: Endoscopic Image Computing, Feature Selection Gates, Hard-Attention Gates, Gradient Routing, CNNs, Vision Transformers, Gastroenterological Polyp Size Estimation, Medical Image Analysis, Overfitting Reduction, Model Generalization.
 
 ## MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.
+
+## Work in Progress... 7-9 October 2024. 
 
 # Feature Selection Gates with Gradient Routing Toolbox
 
