@@ -11,7 +11,7 @@
   <tr>
    <td><a href="https://arxiv.org/pdf/2407.04400" target="_blank">Paper PDF</a></td>
    <td><a href="https://github.com/cosmoimd/feature-selection-gates/blob/main/MICCAI_2024_official_dataset_splits/MICCAI2024-FSG-GR-datasets-official-splits-.zip" target="_blank">Dataset Splits</a></td>
-    <td><a href="https://www.researchgate.net/profile/Giorgio-Roffo" target="_blank">Contact-Author Page</a></td>![img.png](img.png)
+   <td><a href="https://www.researchgate.net/profile/Giorgio-Roffo" target="_blank">Contact-Author Page</a></td>
 </tr>
 </table>
 
