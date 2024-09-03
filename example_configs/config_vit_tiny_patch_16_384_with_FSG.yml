@@ -1,0 +1,162 @@
+# This code refers to the following paper:
+# "Feature Selection Gates with Gradient Routing for Endoscopic Image Computing"
+# Accepted for publication at MICCAI 2024.
+
+# Please cite both the accepted version and the preprint version if you use this code,
+# its methods, ideas, or any part of them.
+
+# Accepted Publication:
+# @inproceedings{roffo2024featureselection,
+#    title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
+#    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+#    booktitle={MICCAI},
+#    year={2024}
+# }
+
+# Preprint version:
+# @misc{roffo2024hardattention,
+#    title={Hard-Attention Gates with Gradient Routing for Endoscopic Image Computing},
+#    author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+#    year={2024},
+#    eprint={2407.04400},
+#    archivePrefix={arXiv},
+#    primaryClass={eess.IV}
+# }
+# DATASETS
+dataset_params:
+  # Class name of the PyTorch Dataset
+  dataset_class: PolypSizeEstimationDataset
+
+  # Directory where output files will be stored
+  output_folder: '/results/camera-ready/toolbox_paper_experiments/vit_FSAG_tiny_patch16_384'
+  dataset_csv_path: '/datasets_polyp_sizing_paper/'
+  saving_step: 5000 # If the dataframe has reached saving_step rows, save it to the output folder.
+
+  # List of datasets; each dataset is specified by a name, a path to a CSV file, and the name of the GT column
+  datasets: # NAME,CSV_FILE,PATH_FRAMES_FOLDERS,FORMAT,GT_NAME,OBJ_ID
+    - [ 'SUN', '/sundatabase/metadata/sun_dataset_labels.csv', '/sundatabase/', 'case%s', 'Size', 'ID' ]
+    - [ 'REALC', '/real-colon_dataset_released_v20230228/lesion_info.csv', '/real-colon_dataset_released_v20230228/', '%s_frames', 'size [mm]', 'unique_object_id' ]
+
+  # Specifies the precision/accuracy of the float data
+  precision_float_accuracy: 1.0 # +/- 1 mm
+
+  # Minimum and maximum sizes for target processing
+  target_process_min: 0.5
+  target_process_max: 20.0
+
+ # Number of frames to sample from each video
+  n_frames_to_sample_train: 40
+
+  # Number of samples per gradient update
+  batch_size: 1
+
+  # Ratio for filtering out the samples whose bounding boxes are not considered centered
+  filter_centered_samples_ratio: 1.0
+
+  # Parameters for preprocessing the images (e.g., normalization, circular cropping)
+  image_preprocessing:
+    mean: [0.32239652, 0.22631808, 0.17500061]
+    std: [0.31781745, 0.2405859, 0.19327126]
+    circular_crop: True
+    crop_radius_ratio: 1.0
+
+
+  # Whether or not to include depth maps in the dataset
+  include_depth_maps: True
+
+  # Whether or not to include RGB masks in the dataset
+  include_rgb_mask: True
+
+  # Number of worker threads for loading the data
+  num_workers: 0
+
+  # number of folds for cross-validation. In inference mode, defines the number of folds to use for the inference.
+  kfold: 6
+
+  start_from_fold: 0
+
+
+num_epochs: 40
+experiment_metrics: ["f1", "balanced_accuracy", 'balanced_perf']
+
+
+# TRANSFORMS
+transforms: transforms_sizing # refers to the Python file containing the transformation classes
+transform_combo: PairedTCombo1 # specific transform class to use
+
+# Parameters for the transforms
+resize_to: 384 # Dimension to which the input images will be resized
+rotation_degree: 30
+color_jitter_params:
+  brightness: 0.15
+  contrast: 0.15
+  saturation: 0.15
+  hue: 0.01
+noise_factor: 0.01
+
+# MODEL
+# FSG are implemented in the following:
+# + model: multi_stream_nets
+# + model_class: FSGNetR18
+# Or Transformers
+# + model: fsg_vision_transformers
+# + model_class: FSGViT
+model: fsg_vision_transformers # refers to the Python file containing the model classes
+model_class: FSGViT # specific model class to use
+
+# Parameters for the model
+model_params:
+  train_midas: False
+  num_classes: 1 # number of output classes
+  num_fc_layers: 3 # number of fully connected layers
+  nodes_fc_layers: [128, 128] # number of nodes in each fully connected layer
+  dropout_rate: 0.35 # dropout rate
+  use_rgb: True
+  use_mask: False
+  use_depth: False
+  model_path: '/gr_checkpoints/vit_tiny_patch16_384.bin'
+
+# LOSS FUNCTION
+loss: weighted_size_combined_loss # refers to the Python file containing the loss function classes
+loss_class: WeightedCombinedLoss # specific loss function class to use
+
+
+# Parameters for the loss function
+loss_params:
+  alpha: 0.0
+  beta: 0.0
+  gamma: 1.0
+  size_threshold_1: 5.0
+  weight_1: 3.0
+  size_threshold_2: 10.0
+  weight_2: 5.0
+
+# OPTIMIZER
+optimizer: Adam # name of the optimizer
+
+# Parameters for the optimizer
+optimizer_params:
+  lr: 0.00005 # learning rate
+  weight_decay: 0.00001 # weight decay (L2 regularization)
+
+clip_grad: 10.0
+clip_gr_grad: 32.0
+
+# LEARNING RATE SCHEDULER
+lr_scheduler: cosine_annealing_warm_restarts # refers to the Python file containing the scheduler classes
+lr_scheduler_class: CosineScheduler # specific scheduler class to use
+
+# Parameters for the learning rate scheduler
+scheduler_params:
+  cycle_limit: 1 # number of epochs for the first restart
+  T_mult: 1 # multiplication factor for the number of epochs between restarts,
+  min_lr: 0.00001 # minimum learning rate
+
+eval_freq: 2 # validate the model every N epochs.
+
+# Feature Selection Gates options.
+FSAG: True  # enable this option for FSGs and select the model and model_class that actually implements the FSG.
+FSAG_LR: False  # enable this option for FSGs and select the model and model_class that actually implements the FSG.
+gr_ofs_lr: 0.0001 # learning rate for the gradient routing online-feature-selection
+inference_mode: True  # set to False for training
+verbose_validation_mode: False # If True, the model will be validated on the validation set for each checkpoint (epochs and folds).
