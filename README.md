@@ -1,3 +1,7 @@
+
+## MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.
+![image](https://github.com/user-attachments/assets/14ddb28f-b4bd-422c-8b6b-4312cf835570)
+
 <div align="center">
 
 ![image](https://github.com/user-attachments/assets/05f1ea5d-5436-45f0-95a8-b70f105dd965)
@@ -18,8 +22,6 @@
 </div>
 
 **Keywords**: Endoscopic Image Computing, Feature Selection Gates, Hard-Attention Gates, Gradient Routing, CNNs, Vision Transformers, Gastroenterological Polyp Size Estimation, Medical Image Analysis, Overfitting Reduction, Model Generalization.
-
-## MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.
 
 
 # Feature Selection Gates with Gradient Routing
@@ -212,7 +214,17 @@ The script simplifies dataset preparation, enabling efficient training of deep l
 
 ## Support
 
-For inquiries or support regarding the implementation or the paper, please reach out to the corresponding authors (#giorgioroffo) via the contact information provided in the paper.
+For inquiries or support regarding the implementation or the paper, please reach out to the corresponding authors via the contact information provided in the paper.
+
+Giorgio Roffo - groffo@cosmoimd.com
+
+## Contact
+
+Andrea Cherubini - acherubini@cosmoimd.com
+
+## Version
+
+v1.0, 2024/10/09
 
 ## License
 
