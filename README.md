@@ -1,4 +1,3 @@
-
 ## MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.
 ![image](https://github.com/user-attachments/assets/14ddb28f-b4bd-422c-8b6b-4312cf835570)
 
@@ -106,8 +105,12 @@ Feature Selection/Attention Gates with Gradient Routing for Online Feature Selec
 ├── runners
 │   └── build_configuration.py
 │   └── trainer.py
-├── train_demo.py
-├── utils.py
+├── vit_with_fsg.py                  # * FSG-ViT integration (import this only)
+├── demo_training_mnist.py
+├── demo_inference_mnist.py
+├── demo_training_imnet.py
+├── demo_inference_imnet.py
+├── README.md                       
 ├── visualize_dataset.py
 └── README.md
 
@@ -165,15 +168,6 @@ Database characteristics:
 - **Polyps**: 100 polyps with details including size, morphology, location, and pathological diagnosis.
 
 
-## Usage
-
-* Clone the repository.
-* Configure your experiments using the YAML files within the config/ directory.
-* To preprocess your datasets, run preprocess_raw_datasets.py.
-* To begin training, execute main_train_and_infer.py.
-* For evaluation and testing, use main_testing.py.
-
-
 ## Dataset Preprocessing Script (preprocess_raw_datasets.py)
 
 This script (`preprocess_raw_datasets.py`) preprocesses raw datasets like the REAL-colon and SUN Colonoscopy Video Database, making them ready for deep learning model training.
@@ -212,6 +206,69 @@ This script (`preprocess_raw_datasets.py`) preprocesses raw datasets like the RE
 
 The script simplifies dataset preparation, enabling efficient training of deep learning models on standardized data.
 
+
+## 💡 Easy Usage
+
+- ✅ **Drop-in**: Easily wraps any `torchvision` ViT model (e.g. `vit_b_16`, `vit_l_16`)
+- ✅ **General-purpose**: Use on **natural images**, **medical data**, and even **token sequences in NLP**
+- ✅ **Regularizes ViTs** for low-data regimes (tested on CIFAR-100, endoscopic videos, etc.)
+- ✅ No ViT surgery: FSG wraps Transformer layers directly
+
+While this method was originally proposed for **polyp size estimation in colonoscopy**, it is designed to generalize across:
+- 🧬 Medical image analysis
+- 🖼️ General image classification
+- 📚 NLP Transformers (e.g. GPT, BERT)
+
+---
+
+## 🧪 Minimal Example
+
+```python
+from torchvision.models import vit_b_16, ViT_B_16_Weights
+from vit_with_fsg import vit_with_fsg
+import torch
+
+print("📥 Loading pretrained ViT...")
+backbone = vit_b_16(weights=ViT_B_16_Weights.DEFAULT)
+
+print("🔧 Injecting FSG into backbone...")
+model = vit_with_fsg(vit_backbone=backbone)
+
+dummy_input = torch.randn(1, 3, 224, 224)
+output = model(dummy_input)
+print("✅ Output shape:", output.shape)
+```
+
+---
+
+## 🧪 Demos (Quick Training + Inference)
+
+| Dataset     | Training Script             | Inference Script            | Checkpoint Path                              |
+|-------------|-----------------------------|------------------------------|-----------------------------------------------|
+| MNIST       | `demo_training_mnist.py`    | `demo_inference_mnist.py`    | `./checkpoints/fsg_vit_mnist_demo.pth`        |
+| Imagenette  | `demo_training_imnet.py`    | `demo_inference_imnet.py`    | `./checkpoints/fsg_vit_imagenette_demo.pth`   |
+
+> ⚠️ These demos use reduced datasets and epochs to run quickly and demonstrate the API.
+
+---
+
+## 📚 Citation
+
+If you use this project, please cite our work:
+
+```bibtex
+@inproceedings{roffo2024FSG,
+   title={Feature Selection Gates with Gradient Routing for Endoscopic Image Computing},
+   author={Giorgio Roffo and Carlo Biffi and Pietro Salvagnini and Andrea Cherubini},
+   booktitle={MICCAI 2024, the 27th International Conference on Medical Image Computing and Computer Assisted Intervention, Marrakech, Morocco, October 2024.},
+   year={2024},
+   organization={Springer}
+}
+```
+
+---
+
+
 ## Support
 
 For inquiries or support regarding the implementation or the paper, please reach out to the corresponding authors via the contact information provided in the paper.
@@ -229,3 +286,6 @@ v1.0, 2024/10/09
 ## License
 
 This project is licensed for use and is subject to the terms outlined in the LICENSE file.
+
+---
+
