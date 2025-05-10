@@ -68,6 +68,25 @@ In this work, we present *Feature-Selection Gates* (FSG), also known as *Hard-At
 
 ![image](https://github.com/user-attachments/assets/d06ddfb8-7a60-4973-9274-db50dcc28d74)
 
+## 🧪 Minimal Example
+
+```python
+from torchvision.models import vit_b_16, ViT_B_16_Weights
+from vit_with_fsg import vit_with_fsg
+import torch
+
+print("📥 Loading pretrained ViT...")
+backbone = vit_b_16(weights=ViT_B_16_Weights.DEFAULT)
+
+print("🔧 Injecting FSG into backbone...")
+model = vit_with_fsg(vit_backbone=backbone)
+
+dummy_input = torch.randn(1, 3, 224, 224)
+output = model(dummy_input)
+print("✅ Output shape:", output.shape)
+```
+
+---
 
 ## Toolbox Structure
 Feature Selection/Attention Gates with Gradient Routing for Online Feature Selection.
@@ -221,26 +240,6 @@ While this method was originally proposed for **polyp size estimation in colonos
 
 ---
 
-## 🧪 Minimal Example
-
-```python
-from torchvision.models import vit_b_16, ViT_B_16_Weights
-from vit_with_fsg import vit_with_fsg
-import torch
-
-print("📥 Loading pretrained ViT...")
-backbone = vit_b_16(weights=ViT_B_16_Weights.DEFAULT)
-
-print("🔧 Injecting FSG into backbone...")
-model = vit_with_fsg(vit_backbone=backbone)
-
-dummy_input = torch.randn(1, 3, 224, 224)
-output = model(dummy_input)
-print("✅ Output shape:", output.shape)
-```
-
----
-
 ## 🧪 Demos (Quick Training + Inference)
 
 | Dataset     | Training Script             | Inference Script            | Checkpoint Path                              |
@@ -251,6 +250,46 @@ print("✅ Output shape:", output.shape)
 > ⚠️ These demos use reduced datasets and epochs to run quickly and demonstrate the API.
 
 ---
+
+## ▶️ How to Run the FSG-ViT Demos
+
+### 🏋️‍♂️ Training
+
+Train the ViT-B16 + FSG model using small demo datasets:
+
+```bash
+# Train on MNIST (test set used for speed)
+python demo_training_mnist.py
+
+# Train on Imagenette (ImageNet-mini val set)
+python demo_training_imnet.py
+````
+
+This will save model checkpoints to:
+
+* `./checkpoints/fsg_vit_mnist_demo.pth`
+* `./checkpoints/fsg_vit_imagenette_demo.pth`
+
+---
+
+### 🔍 Inference
+
+Run inference using a saved checkpoint or from scratch:
+
+```bash
+# Inference with pretrained checkpoint
+python demo_inference_mnist.py --checkpoint ./checkpoints/fsg_vit_mnist_demo.pth
+python demo_inference_imnet.py --checkpoint ./checkpoints/fsg_vit_imagenette_demo.pth
+```
+
+```bash
+# Inference from scratch (random weights)
+python demo_inference_mnist.py
+python demo_inference_imnet.py
+```
+
+ℹ️ When no `--checkpoint` is given, the model is evaluated without any fine-tuning.
+
 
 ## 📚 Citation
 
